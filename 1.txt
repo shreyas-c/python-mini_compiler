@@ -19,6 +19,7 @@ statement     -->  slist NEWLINE | compound_stmt
 slist     -->  simplest (";" simplest)* [";"]
 conditional_exx -->  ot ["if" ot "else" exx]
 exx             -->  conditional_exx | lambda_expr
+#ot for or testing
 ot  -->  at | ot "or" at
 at -->  nt | at "and" nt
 

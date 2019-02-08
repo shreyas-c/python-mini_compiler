@@ -1,0 +1,44 @@
+#Grammar for python for loop and if construct
+ifst -->  "if" exx ":" suite
+             ("elif" exx ":" suite)*
+             ["else" ":" suite]
+forst -->  "for" tlist "in" generator_fn ":" suite
+
+compound_stmt -->  ifst
+                   | whilest
+                   | forst
+                   | tryst
+                   | withst
+                   | funcdef
+                   | classdef
+
+suite -->  slist NEWLINE | NEWLINE INDENT statement+ DEDENT
+
+statement     -->  slist NEWLINE | compound_stmt
+
+slist     -->  simplest (";" simplest)* [";"]
+conditional_exx -->  ot ["if" ot "else" exx]
+exx             -->  conditional_exx | lambda_expr
+ot  -->  at | ot "or" at
+at -->  nt | at "and" nt
+
+nt -->  comparison | "not" nt
+comparison    -->  or_expr (comp_operator or_expr)*
+comp_operator -->  "<" | ">" | "==" | ">=" | "<=" | "!="
+                   | "is" ["not"] | ["not"] "in"
+tlist     -->  target ("," target)*
+target          -->  identifier
+                     | "(" [tlist] ")"
+                     | "[" [tlist] "]"
+
+#asst being all the assignment statements
+simplest -->  asst
+                 | ps
+                 | ds
+                 | rs
+                 | ys
+                 | rs
+                 | bs
+                 | cs
+                 | is
+
